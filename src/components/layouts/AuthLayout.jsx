@@ -3,7 +3,6 @@ import expense3 from '../../assets/images/expense1.png';
 
 function AuthLayout({ children }){
 
-    console.log(expense3);
     return (
         <div className="flex">
             <div className="w-screen h-screen md:w-[60vw] px-12 pt-8 pb-12">
