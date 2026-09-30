@@ -3,9 +3,13 @@ import {useForm} from "react-hook-form";
 import Input from "../../components/formComponents/Input";
 import AuthLayout from "../../components/layouts/AuthLayout";
 import {RegisterSchema} from "../../utils/authSchema";
+import { useState } from "react";
+import ProfilePhotoSelector from "../../components/formComponents/ProfilePhotoSelector";
+import AuthSwitch from "../../components/formComponents/AuthSwitch";
 
 
 function Register(){
+    const[profilePic, setProfilePic] = useState();
 
     const {
         register,
@@ -35,13 +39,15 @@ function Register(){
                     </p>
 
                     <form onSubmit={handleSubmit(handleRegister)}>
+                        <ProfilePhotoSelector image={profilePic} setImage={setProfilePic} />
+
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <Input
                                 type="text"
                                 placeholder="zoro"
                                 label="FUll Name"
                                 register={register}
-                                registerName="fullname"
+                                registerName="fullName"
                                 errors={errors}
                             />
                             <Input
@@ -63,6 +69,20 @@ function Register(){
                                 />
                             </div>
                         </div>
+
+                        <button
+                            type="submit"
+                            className="btn-primary"
+                        >
+                            Register
+                        </button>
+
+                        <AuthSwitch
+                            path="/login"
+                            doAction="Login"
+                        >
+                            Already have an account{' '}
+                        </AuthSwitch>
                     </form>
                 </div>
             </AuthLayout>
