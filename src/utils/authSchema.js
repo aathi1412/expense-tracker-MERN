@@ -30,7 +30,7 @@ export const LoginSchema = z.object({
 })
 
 export const RegisterSchema = z.object({
-    name: NameSchema,
+    fullName: NameSchema,
     email: EmailSchema,
     password: PasswordSchema,
     // acceptedTerms: z.literal(true, {
