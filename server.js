@@ -19,6 +19,11 @@ app.use(express.json());
 connectDB();
 
 app.use("/api/v1/auth", require("./routes/authRoutes"));
+app.use("/api/v1/income", require("./routes/IncomeRoutes"));
+app.use("/api/v1/expense", require("./routes/ExpenseRoutes"));
+app.use("/api/v1/dashboard", require("./routes/DashboardRoutes"));
+
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
