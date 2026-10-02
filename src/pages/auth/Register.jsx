@@ -1,15 +1,23 @@
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useForm} from "react-hook-form";
+import {useNavigate} from "react-router-dom";
 import Input from "../../components/formComponents/Input";
 import AuthLayout from "../../components/layouts/AuthLayout";
 import {RegisterSchema} from "../../utils/authSchema";
 import { useState } from "react";
 import ProfilePhotoSelector from "../../components/formComponents/ProfilePhotoSelector";
 import AuthSwitch from "../../components/formComponents/AuthSwitch";
-
+import {API_PATHS} from "../../utils/apiPath";
+import {toast} from "react-hot-toast";
+import axiosInstance from "../../utils/axiosInstance";
+import { UserContext } from "../../context/UserContext";
+import { useContext } from "react";
+import UploadImage from "../../utils/UploadImage";
 
 function Register(){
     const[profilePic, setProfilePic] = useState();
+    const navigate = useNavigate();
+    const { updateUser } = useContext(UserContext);
 
     const {
         register,
@@ -20,12 +28,33 @@ function Register(){
     });
 
     const handleRegister = async (data) => {
-        console.log(data);
-        // try{
-        //
-        // }catch (e) {
-        //
-        // }
+        let profileImageUrl = "";
+        const toastId = toast.loading("Registering...");
+        try{
+
+            if(profilePic){
+                const imageUploadResponse = await UploadImage(profilePic);
+                profileImageUrl = imageUploadResponse.imageUrl || "";
+            }
+
+
+            const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {...data, profileImageUrl});
+            if(response.data){
+                toast.success("Registration successful", { id: toastId });
+            }
+            const { token, user } = response.data;
+            if(token){
+                localStorage.setItem("token", token);
+                updateUser(user);
+                navigate("/dashboard");
+            }
+        }catch (e) {
+            if(e.response && e.response.data && e.response.data.message){
+                toast.error(e.response.data.message, { id: toastId });
+            }else{
+                toast.error("Something went wrong", { id: toastId });
+            }
+        }
     }
     return (
         <>
