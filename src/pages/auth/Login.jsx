@@ -1,9 +1,15 @@
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useForm} from "react-hook-form";
+import {useNavigate} from "react-router-dom";
 import AuthSwitch from "../../components/formComponents/AuthSwitch";
 import Input from "../../components/formComponents/Input";
 import AuthLayout from "../../components/layouts/AuthLayout";
 import {LoginSchema} from "../../utils/authSchema";
+import {API_PATHS} from "../../utils/apiPath";
+import {toast} from "react-hot-toast";
+import axiosInstance from "../../utils/axiosInstance";
+import { useContext } from "react";
+import { UserContext } from "../../context/UserContext";
 
 
 function Login(){
@@ -15,13 +21,28 @@ function Login(){
         resolver: zodResolver(LoginSchema)
     });
 
+    const navigate = useNavigate();
+    const { updateUser } = useContext(UserContext);
+
     const handleLogin = async (data) => {
-        console.log(data);
-        // try{
-        //
-        // }catch (e) {
-        //
-        // }
+        const toastId = toast.loading("Logging in...");
+        try {
+            const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, data);
+            if(response.data){
+                toast.success("Login successful", { id: toastId });
+            }
+            const { token, user } = response.data;
+
+            if(token){
+                localStorage.setItem("token", token);
+                updateUser(user);
+                navigate("/dashboard");
+            }
+        } catch (error) {
+            if(error.response && error.response.data && error.response.data.message){
+                toast.error(error.response.data.message, { id: toastId });
+            }
+        }
     }
     return (
         <AuthLayout>
