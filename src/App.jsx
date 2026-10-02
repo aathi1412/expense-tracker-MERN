@@ -4,11 +4,14 @@ import Register from "./pages/auth/Register";
 import Expense from "./pages/dashboard/Expense";
 import Home from "./pages/dashboard/Home";
 import Income from "./pages/dashboard/Income";
+import { Toaster } from "react-hot-toast";
+import UserProvider from "./context/UserContext";
 
 function App() {
 
   return (
-    <>
+    <UserProvider>
+      <Toaster />
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<Root />}/>
@@ -19,7 +22,7 @@ function App() {
                 <Route path='/expense' element={<Expense />}/>
             </Routes>
         </BrowserRouter>
-    </>
+    </UserProvider>
   )
 }
 
