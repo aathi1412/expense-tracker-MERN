@@ -38,9 +38,12 @@ function Login(){
                 updateUser(user);
                 navigate("/dashboard");
             }
-        } catch (error) {
-            if(error.response && error.response.data && error.response.data.message){
-                toast.error(error.response.data.message, { id: toastId });
+        } catch (e) {
+            console.error("Login error:", e);
+            if(e.response && e.response.data && e.response.data.message){
+                toast.error(e.response.data.message, { id: toastId });
+            }else{
+                toast.error("Something went wrong", { id: toastId });
             }
         }
     }
