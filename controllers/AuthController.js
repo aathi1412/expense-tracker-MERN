@@ -6,7 +6,7 @@ const generateToken = (id) => {
 };
 
 const registerUser = async (req, res) => {
-    const { fullName, email, password, profileUrl } = req.body;
+    const { fullName, email, password, profileImageUrl } = req.body;
 
     if(!fullName || !email || !password){
         return res.status(400).json({message: "All fields are required!"});
@@ -22,8 +22,10 @@ const registerUser = async (req, res) => {
             fullName,
             email,
             password,
-            profileUrl
+            profileImageUrl
         });
+
+        console.log("User created:", profileImageUrl);
 
         res.status(201).json({
             id: user._id,
@@ -50,6 +52,8 @@ const loginUser = async (req, res) => {
         if(!user || !(await user.comparePassword(password))){
             return res.status(400).json({message: "invalid credentials"});
         }
+
+        console.log("User logged in:", user);
 
         res
             .status(200)
