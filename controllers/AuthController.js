@@ -46,7 +46,6 @@ const loginUser = async (req, res) => {
 
     try {
         const user = await User.findOne({email});
-            console.log(email, password, user);
 
         if(!user || !(await user.comparePassword(password))){
             return res.status(400).json({message: "invalid credentials"});
@@ -68,7 +67,7 @@ const loginUser = async (req, res) => {
 
 const getUserInfo = async (req, res) => {
     try {
-        const user = await User.findOne(req.user.id).select("-password");
+        const user = await User.findOne({ _id: req.user.id }).select("-password");
 
         if(!user){
             return res.status(404).json({message: "User not found"});
