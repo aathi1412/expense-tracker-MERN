@@ -1,6 +1,6 @@
-const multer = require("multer");
+import multer, { diskStorage } from "multer";
 
-const storage = multer.diskStorage({
+const storage = diskStorage({
     destination: (req, file, cb) => {
         cb(null, "uploads/");
     },
@@ -23,4 +23,4 @@ const upload = multer({
     fileFilter
 });
 
-module.exports = upload;
+export default upload;
