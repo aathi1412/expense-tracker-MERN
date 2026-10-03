@@ -13,7 +13,7 @@ router.post("/login", loginUser);
 
 router.get("/user", protect, getUserInfo);
 
-router.post("/upload-image", require("../middleware/UploadMiddleware").single("image"), (req, res) => {
+router.post("/upload-image", require("../middleware/UploadMiddleware").default.single("image"), (req, res) => {
     if(!req.file){
         return res.status(400).json({ message: "No file uploaded" });
     }
