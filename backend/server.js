@@ -6,9 +6,18 @@ const connectDB = require("./config/db");
 
 const app = express();
 
+const allowedOrigins = [
+    "http://localhost:5173",
+    "http://192.168.137.1:5173",
+    "https://your-frontend-url.onrender.com",
+];
 app.use(
     cors({
-        origin: process.env.CLIENT_URL || '*',
+        origin: function(origin, cb){
+            if(!origin || allowedOrigins.includes(origin)){
+                cb(null, true);
+            }else cb(new Error("Not allowed by CORS"));
+        },
         methods: ["GET", "POST", "PUT", "DELETE"],
         allowedHeaders: ["content-type", "Authorization"],
     })
