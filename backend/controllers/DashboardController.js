@@ -3,7 +3,7 @@ const expense = require("../models/Expense");
 const { Types } = require("mongoose");
 
 const getDashboardData = async (req, res) => {
-    const userObjectId = new Types.ObjectId(String(userId));
+    const userObjectId = new Types.ObjectId(String(req.user.id));
     try {
 
         const totalIncome = await income.aggregate([
