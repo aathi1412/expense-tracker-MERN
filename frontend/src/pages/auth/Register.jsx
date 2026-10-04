@@ -10,14 +10,13 @@ import AuthSwitch from "../../components/formComponents/AuthSwitch";
 import {API_PATHS} from "../../utils/apiPath";
 import {toast} from "react-hot-toast";
 import axiosInstance from "../../utils/axiosInstance";
-import { UserContext } from "../../context/UserContext";
-import { useContext } from "react";
+import { useAuth } from "../../hooks/useAuth";
 import UploadImage from "../../utils/UploadImage";
 
 function Register(){
     const[profilePic, setProfilePic] = useState();
     const navigate = useNavigate();
-    const { updateUser } = useContext(UserContext);
+    const { updateUser } = useAuth();
 
     const {
         register,
