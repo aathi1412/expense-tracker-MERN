@@ -1,6 +1,6 @@
 import multer, { diskStorage } from "multer";
-const path = require("path");
-const fs = require("fs");
+import path from "path";
+import fs from "fs";
 
 
 const uploads = path.join(process.cwd(), "uploads");
