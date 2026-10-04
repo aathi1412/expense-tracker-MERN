@@ -8,8 +8,7 @@ import {LoginSchema} from "../../utils/authSchema";
 import {API_PATHS} from "../../utils/apiPath";
 import {toast} from "react-hot-toast";
 import axiosInstance from "../../utils/axiosInstance";
-import { useContext } from "react";
-import { UserContext } from "../../context/UserContext";
+import { useAuth } from "../../hooks/useAuth";
 
 
 function Login(){
@@ -22,10 +21,11 @@ function Login(){
     });
 
     const navigate = useNavigate();
-    const { updateUser } = useContext(UserContext);
+    const { updateUser } = useAuth();
 
     const handleLogin = async (data) => {
         const toastId = toast.loading("Logging in...");
+
         try {
             const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, data);
             if(response.data){
