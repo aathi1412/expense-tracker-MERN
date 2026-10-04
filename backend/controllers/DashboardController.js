@@ -2,10 +2,9 @@ const income = require("../models/Income");
 const expense = require("../models/Expense");
 const { Types } = require("mongoose");
 
-const getDashBoardData = async (req, res) => {
+const getDashboardData = async (req, res) => {
+    const userObjectId = new Types.ObjectId(String(userId));
     try {
-        const userId = req.user.id;
-        const userObjectId = new Types.ObjectId(String(userId));
 
         const totalIncome = await income.aggregate([
             { $match: {userId: userObjectId} },
@@ -18,26 +17,26 @@ const getDashBoardData = async (req, res) => {
         ]);
 
         const last60DaysIncomeTransaction = await income.find({
-            userId,
+            userId: userObjectId,
             date: { $gte: new Date(Date.now() - 60 * 24 * 60 * 60 * 1000) },
         }).sort({ date: -1 });
 
         const incomeLast60Days = last60DaysIncomeTransaction.reduce((sum, transaction) => sum + transaction.amount, 0);
 
         const last30DaysExpenseTransaction = await expense.find({
-            userId,
+            userId: userObjectId,
             date: { $gte: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000) }
         }).sort({ date: -1 });
 
         const expenseLast30Days = last30DaysExpenseTransaction.reduce((sum, transaction) => sum + transaction.amount, 0);
 
         const lastTransactions = [ 
-            ...(await income.find({ userId }).sort({ date: -1 }).limit(5)).map(
+            ...(await income.find({ userId: userObjectId }).sort({ date: -1 }).limit(5)).map(
                 transaction => ({ 
                     ...transaction.toObject(), type: "income" 
                 })
             ),
-            ...(await expense.find({ userId }).sort({ date: -1 }).limit(5)).map(
+            ...(await expense.find({ userId: userObjectId }).sort({ date: -1 }).limit(5)).map(
                 transaction => ({ 
                     ...transaction.toObject(), type: "expense" 
                 })
@@ -63,4 +62,4 @@ const getDashBoardData = async (req, res) => {
     }
 }
 
-module.exports = getDashBoardData;
+module.exports = getDashboardData;
