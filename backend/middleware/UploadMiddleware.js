@@ -1,26 +1,31 @@
-import multer, { diskStorage } from "multer";
-import path from "path";
-import fs from "fs";
+const multer = require("multer");
+const path = require("path");
+const fs = require("fs");
 
-
-const uploads = path.join(process.cwd(), "../uploads");
+const uploads = path.join(__dirname, "../uploads");
 
 if (!fs.existsSync(uploads)) {
     fs.mkdirSync(uploads, { recursive: true });
 }
 
-const storage = diskStorage({
+const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, "uploads/");
+        cb(null, uploads);
     },
+
     filename: (req, file, cb) => {
         cb(null, `${Date.now()}_${file.originalname}`);
     }
 });
 
 const fileFilter = (req, file, cb) => {
-    const allowedFileTypes = ["image/jpeg", "image/jpg", "image/png"];
-    if(allowedFileTypes.includes(file.mimetype)){
+    const allowedFileTypes = [
+        "image/jpeg",
+        "image/jpg",
+        "image/png"
+    ];
+
+    if (allowedFileTypes.includes(file.mimetype)) {
         cb(null, true);
     } else {
         cb(new Error("Invalid file type"), false);
@@ -32,4 +37,4 @@ const upload = multer({
     fileFilter
 });
 
-export default upload;
+module.exports = upload; 
