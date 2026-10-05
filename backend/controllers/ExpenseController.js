@@ -7,20 +7,22 @@ const addExpense = async (req, res) => {
 
     try{
         const { icon, category, amount, date } = req.body;
-        if(!icon || !category || !amount || !date){
+        if(!icon || !category || !amount){
             return res.status(400).json({ message: "all fields are required" });
         }
+
         const expense = new Expense({
             userId,
             icon,
             category,
             amount,
-            date: new Date(date)
+            ...(date && { date: new Date(date) }) 
         });
         await expense.save();
         res.status(201).json(expense);
     }catch(error){
-        res.status(500).json({ message: "Internal Server Error"});
+        console.log(error);
+        res.status(500).json({ message: "Internal Server Error", error: error});
     }
 }
 
