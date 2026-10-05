@@ -3,7 +3,7 @@ import path from "path";
 import fs from "fs";
 
 
-const uploads = path.join(process.cwd(), "uploads");
+const uploads = path.join(process.cwd(), "../uploads");
 
 if (!fs.existsSync(uploads)) {
     fs.mkdirSync(uploads, { recursive: true });
