@@ -42,15 +42,7 @@ const getDashboardData = async (req, res) => {
                 })
             )
         ].sort((a, b) => new Date(b.date) - new Date(a.date));
-
-        console.log("userId:", req.user.id);
-        console.log("userObjectId:", userObjectId);
-
-        console.log("Income:", await income.find({ userId: userObjectId }));
-        console.log("Expense:", await expense.find({ userId: userObjectId }));
-        console.log("60 days income:", last60DaysIncomeTransaction);
-        console.log("30 days expense:", last30DaysExpenseTransaction);
-
+        
         res.json({
             totalBalance: (totalIncome[0]?.total || 0) - (totalExpense[0]?.total || 0),
             totalIncome: totalIncome[0]?.total || 0,

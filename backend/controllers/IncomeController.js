@@ -20,7 +20,7 @@ const addIncome = async (req, res) => {
         await income.save();
         res.status(201).json(income);
     }catch(error){
-        console.log(error);
+        console.log("Server Error:", error);
         res.status(500).json({ message: "Internal Server Error"});
     }
 }

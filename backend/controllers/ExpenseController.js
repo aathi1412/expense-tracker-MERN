@@ -21,7 +21,7 @@ const addExpense = async (req, res) => {
         await expense.save();
         res.status(201).json(expense);
     }catch(error){
-        console.log(error);
+        console.log("Server Error:", error);
         res.status(500).json({ message: "Internal Server Error", error: error});
     }
 }
