@@ -1,25 +1,26 @@
-export const BASE_URL = "http://localhost:8000/api/v1";
+export const BASE_URL = " https://expense-tracker-mern-kk0f.onrender.com";
+// http://localhost:8000/api/v1";
 
 export const API_PATHS = {
     AUTH: {
-        LOGIN: `${BASE_URL}/auth/login`,
-        REGISTER: `${BASE_URL}/auth/register`,
-        GET_USER_INFO: `${BASE_URL}/auth/user`,
+        LOGIN: "/api/v1/auth/login",
+        REGISTER: "/api/v1/auth/register",
+        GET_USER_INFO: "/api/v1/auth/user",
     },
-    DASHBOARD: { GET_DATA: `${BASE_URL}/dashboard` },
+    DASHBOARD: { GET_DATA: "/api/v1/dashboard" },
     EXPENSE: {
-        ADD: `${BASE_URL}/expense/add`,
-        GET_ALL_INCOME: `${BASE_URL}/expense/get`,
-        DELETE_: (id) => `${BASE_URL}/expense/${id}`,
-        DOWNLOAD_INCOME: `${BASE_URL}/expense/downloadexcel`
+        ADD: "/api/v1/expense/add",
+        GET_ALL_EXPENSE: "/api/v1/expense/get",
+        DELETE: (id) => `/api/v1/expense/${id}`,
+        DOWNLOAD_EXPENSE: "/api/v1/expense/downloadexcel"
     },
     INCOME: {
-        ADD: `${BASE_URL}/income/add`,
-        GET_ALL_INCOME: `${BASE_URL}/income/get`,
-        DELETE_: (id) => `${BASE_URL}/income/${id}`,
-        DOWNLOAD_INCOME: `${BASE_URL}/income/downloadexcel`
+        ADD: "/api/v1/income/add",
+        GET_ALL_INCOME: "/api/v1/income/get",
+        DELETE: (id) => `/api/v1/income/${id}`,
+        DOWNLOAD_INCOME: "/api/v1/income/downloadexcel"
     },
     IMAGE: {
-        UPLOAD_IMAGE: `${BASE_URL}/auth/upload-image`
+        UPLOAD_IMAGE: "/api/v1/auth/upload-image"
     }
 }
