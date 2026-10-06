@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import EmojiPickerPopup from '../EmojiPickerPopup';
 
 function AddIncomeForm({ onAddIncome }) {
@@ -8,6 +8,14 @@ function AddIncomeForm({ onAddIncome }) {
         date: "",
         icon: ""
     });
+
+    useEffect(() => {
+        document.body.style.overflow = "hidden";
+
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, []);
 
     const handleChange = (key, value) => setIncome({...income, [key]: value});
   return (
@@ -46,6 +54,9 @@ function AddIncomeForm({ onAddIncome }) {
             placeholder=''
             type='date'
             className='add-form'
+            onWheel={(e) => {
+                e.currentTarget.blur();
+            }}
         />
 
         <div className='flex justify-end mt-6'>
