@@ -5,7 +5,6 @@ const COLORS = ["#875CF5", "#FA2C37", "#FF6900", "#4f39f6"];
 
 function RecentIncomeWithChart({ data, totalIncome}) {
     const [chartData, setChartData] = useState([]);
-
     const prepareChartData = () => {
         const result = data.map((item) => ({
             source: item?.source,
