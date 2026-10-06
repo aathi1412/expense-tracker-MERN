@@ -6,7 +6,7 @@ function RecentTransactions({ transactions, onSeeMore}) {
   return (
     <div className='card'>
         <div className='flex items-center justify-center'>
-            <h5 className='text-lg'>Recent Transactions</h5>
+            <h5 className='text-lg mr-4'>Recent Transactions</h5>
             <button 
                 className='card-btn'
                 onClick={onSeeMore}
@@ -14,21 +14,25 @@ function RecentTransactions({ transactions, onSeeMore}) {
                 see All <LuArrowRight className='text-base'/>
             </button>
         </div>
-        <div className='mt-6'>
-            {transactions?.slice(0,5)?.map((item) => {
-                return(
-                    <TransactionInfoCard
-                        key={item._id}
-                        title={item.type == 'expense' ? item.category : item.source}
-                        icon={item.icon}
-                        date={moment(item.date).format("Do MMM YYYY")}
-                        amount={item.amount}
-                        type={item.type}
-                        hideDeleteBtn
-                    />
-                )
-            })}
-        </div>
+        {transactions && transactions.length === 0 
+        ? (<p className='text-center mt-4 text-lg'>No recent of transactions</p>)
+        :(
+            <div className='mt-6'>
+                {transactions?.slice(0,5)?.map((item) => {
+                    return(
+                        <TransactionInfoCard
+                            key={item._id}
+                            title={item.type == 'expense' ? item.category : item.source}
+                            icon={item.icon}
+                            date={moment(item.date).format("Do MMM YYYY")}
+                            amount={item.amount}
+                            type={item.type}
+                            hideDeleteBtn
+                        />
+                    )
+                })}
+            </div>
+        )}
     </div>
   )
 }
