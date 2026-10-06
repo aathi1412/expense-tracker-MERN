@@ -34,7 +34,7 @@ function CustomPieChart({
                 shape={(props) => (<Sector {...props} fill={colors[props.index % colors.length]}/>)}
             />
             <Tooltip content={<CustomTooltipPie/>}/>
-            <Legend content={<CustomLegend/>}/>
+            <Legend content={<CustomLegend  colors={colors}/>}/>
 
             {showTextAnchor && (
                 <>
