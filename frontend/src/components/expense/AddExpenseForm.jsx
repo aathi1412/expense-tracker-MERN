@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import EmojiPickerPopup from '../EmojiPickerPopup';
 
 function AddExpenseForm({ onAddExpense }) {
@@ -8,6 +8,14 @@ function AddExpenseForm({ onAddExpense }) {
         date: "",
         icon: ""
     });
+
+    useEffect(() => {
+        document.body.style.overflow = "hidden";
+
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, []);
 
     const handleChange = (key, value) => setExpense({...expense, [key]: value});
   return (
@@ -36,6 +44,9 @@ function AddExpenseForm({ onAddExpense }) {
             placeholder=''
             type='number'
             className='add-form'
+            onWheel={(e) => {
+                e.currentTarget.blur();
+            }}
         />
 
         <label className="text-[13px] text-slate-800">Date</label>
