@@ -7,7 +7,7 @@ function ExpenseTransactions({ transactions, onSeeMore}) {
   return (
     <div className='card'>
         <div className='flex items-center justify-center'>
-            <h5 className='text-lg'>Expenses</h5>
+            <h5 className='text-lg mr-4'>Expenses</h5>
             <button 
                 className='card-btn'
                 onClick={onSeeMore}
@@ -15,21 +15,25 @@ function ExpenseTransactions({ transactions, onSeeMore}) {
                 see All <LuArrowRight className='text-base'/>
             </button>
         </div>
-        <div className=''>
-            {transactions?.slice(0,5)?.map((item) => {
-                return(
-                    <TransactionInfoCard
-                        key={item._id}
-                        title={item.category}
-                        icon={item.icon}
-                        date={moment(item.date).format("Do MMM YYYY")}
-                        amount={item.amount}
-                        type="expense"
-                        hideDeleteBtn
-                    />
-                )
-            })}
-        </div>
+        {transactions.length === 0 
+        ? (<p className='text-center text-lg mt-5'>No History of expenses</p>)
+        :(
+            <div className=''>
+                {transactions?.slice(0,5)?.map((item) => {
+                    return(
+                        <TransactionInfoCard
+                            key={item._id}
+                            title={item.category}
+                            icon={item.icon}
+                            date={moment(item.date).format("Do MMM YYYY")}
+                            amount={item.amount}
+                            type="expense"
+                            hideDeleteBtn
+                        />
+                    )
+                })}
+            </div>
+        )}
     </div>
   )
 }
