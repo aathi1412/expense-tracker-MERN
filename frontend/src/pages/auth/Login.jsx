@@ -28,15 +28,14 @@ function Login(){
 
         try {
             const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, data);
-            if(response.data){
-                toast.success("Login successful", { id: toastId });
-            }
+
             const { token, user } = response.data;
 
             if(token){
+                toast.success("Login successful", { id: toastId });
                 localStorage.setItem("token", token);
                 updateUser(user);
-                navigate("/dashboard");
+                navigate("/dashboard", { replace: true });
             }
         } catch (e) {
             console.error("Login error:", e);
