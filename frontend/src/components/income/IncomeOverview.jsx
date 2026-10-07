@@ -26,10 +26,14 @@ function IncomeOverview({transactions, onAddIncome}) {
         </div>
 
         <div className='mt-10'>
-            <CustomBarChart
-                data={chartData}
-                dataKey="month"
-            />
+            {transactions.length === 0 
+            ? (<p className='text-center text-lg'>Add your Income</p>)
+            :(
+                <CustomBarChart
+                    data={chartData}
+                    dataKey="month"
+                />
+            )}
         </div>
     </div>
   )
