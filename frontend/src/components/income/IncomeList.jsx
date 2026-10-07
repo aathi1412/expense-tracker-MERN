@@ -15,21 +15,26 @@ function IncomeList({ transactions, onDelete, onDownload }) {
                 <LuDownload className='text-base'/>Download
             </button>
         </div>
-        <div className='grid grid-cols-1 md:grid-cols-2'>
-            {transactions?.map((item) => {
-                return(
-                    <TransactionInfoCard
-                        key={item._id}
-                        title={item.source}
-                        icon={item.icon}
-                        date={moment(item.date).format("Do MMM YYYY")}
-                        amount={item.amount}
-                        type="income"
-                        onDelete={() => onDelete(item._id)}
-                    />
-                )
-            })}
-        </div>
+        {transactions.length === 0 
+        ? (<p className='text-center text-lg'>No History of incomes</p>)
+        :(
+            <div className='grid grid-cols-1 md:grid-cols-2'>
+                {transactions?.map((item) => {
+                    return(
+                        <TransactionInfoCard
+                            key={item._id}
+                            title={item.source}
+                            icon={item.icon}
+                            date={moment(item.date).format("Do MMM YYYY")}
+                            amount={item.amount}
+                            type="income"
+                            onDelete={() => onDelete(item._id)}
+                        />
+                    )
+                })}
+            </div>
+        )}
+        
     </div>
   )
 }
