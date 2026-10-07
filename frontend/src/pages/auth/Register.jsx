@@ -69,7 +69,7 @@ function Register(){
                     <form onSubmit={handleSubmit(handleRegister)}>
                         <ProfilePhotoSelector image={profilePic} setImage={setProfilePic} />
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="lg:grid gap-4">
                             <Input
                                 type="text"
                                 placeholder="zoro"
