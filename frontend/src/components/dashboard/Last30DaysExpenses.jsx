@@ -16,7 +16,7 @@ function Last30DaysExpenses({ data }) {
             <h5 className='text-lg'>Last 30 Days Expenses</h5>
         </div>
         {chartData.length === 0 
-        ? (<p className='text-center text-lg'>No History of expenses</p>)
+        ? (<p className='h-full flex justify-center items-center text-lg'>No History of expenses</p>)
         :(
             <CustomBarChart
                 data={chartData}
