@@ -1,4 +1,4 @@
-export const BASE_URL = " https://expense-tracker-mern-kk0f.onrender.com";
+export const BASE_URL = import.meta.env.BASE_URL;
 
 export const API_PATHS = {
     AUTH: {
