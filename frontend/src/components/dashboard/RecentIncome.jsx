@@ -16,7 +16,7 @@ function RecentIncome({ transactions, onSeeMore }) {
             </button>
         </div>
         {transactions.length === 0 
-        ? (<p className='text-center mt-3 text-lg'>No History of Incomes</p>)
+        ? (<p className='h-full flex justify-center items-center text-lg'>Add your Incomes</p>)
         :(
             <div className='mt-6'>
                 {transactions?.slice(0,5)?.map((item) => {
