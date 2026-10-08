@@ -27,7 +27,7 @@ function ExpenseOverview({transactions, onAddExpense}) {
 
         <div className='mt-10'>
             {chartData.length === 0 
-            ? (<p className='text-center text-lg'>Add your expenses</p>)
+            ? (<p className='h-full flex justify-center items-center text-lg'>Add your expenses</p>)
             :(<CustomLineChart
                 data={chartData}
             />)}
