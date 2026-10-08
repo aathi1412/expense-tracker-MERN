@@ -15,7 +15,7 @@ function RecentTransactions({ transactions, onSeeMore}) {
             </button>
         </div>
         {transactions && transactions.length === 0 
-        ? (<p className='text-center mt-4 text-lg'>No recent of transactions</p>)
+        ? (<p className='h-full flex justify-center items-center text-lg'>No recent of transactions</p>)
         :(
             <div className='mt-6'>
                 {transactions?.slice(0,5)?.map((item) => {
