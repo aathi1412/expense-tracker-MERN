@@ -16,7 +16,7 @@ function ExpenseTransactions({ transactions, onSeeMore}) {
             </button>
         </div>
         {transactions.length === 0 
-        ? (<p className='text-center text-lg mt-5'>No History of expenses</p>)
+        ? (<p className='h-full flex justify-center items-center text-lg'>Add your expenses</p>)
         :(
             <div className=''>
                 {transactions?.slice(0,5)?.map((item) => {
