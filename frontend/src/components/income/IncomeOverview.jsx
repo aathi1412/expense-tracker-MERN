@@ -27,7 +27,7 @@ function IncomeOverview({transactions, onAddIncome}) {
 
         <div className='mt-10'>
             {transactions.length === 0 
-            ? (<p className='text-center text-lg'>Add your Income</p>)
+            ? (<p className='h-full flex justify-center items-center text-lg'>Add your Income</p>)
             :(
                 <CustomBarChart
                     data={chartData}
