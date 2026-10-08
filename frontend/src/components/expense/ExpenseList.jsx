@@ -17,7 +17,7 @@ function ExpenseList({ transactions, onDelete, onDownload }) {
             </button>
         </div>
         {transactions.length === 0 
-        ? (<p className='text-center text-lg'>No History of expenses</p>)
+        ? (<p className='flex justify-center items-center text-lg'>No History of expenses</p>)
         :(
             <div className='grid grid-cols-1 md:grid-cols-2'>
                 {transactions?.map((item) => {
