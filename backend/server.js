@@ -7,8 +7,7 @@ const connectDB = require("./config/db");
 const app = express();
 
 const allowedOrigins = [
-    "https://trackmyexpensez.netlify.app/",
-    "http://localhost:4173",
+    "https://trackmyexpensez.netlify.app"
 ];
 app.use(
     cors({
