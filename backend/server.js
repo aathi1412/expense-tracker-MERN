@@ -7,9 +7,8 @@ const connectDB = require("./config/db");
 const app = express();
 
 const allowedOrigins = [
-    "http://localhost:5173",
-    "http://192.168.137.1:5173",
-    "https://your-frontend-url.onrender.com",
+    "https://trackmyexpensez.netlify.app/",
+    "http://localhost:4173",
 ];
 app.use(
     cors({
@@ -36,5 +35,5 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    console.log(`Server Started!`);
 });
