@@ -1,40 +1,27 @@
 const multer = require("multer");
-const path = require("path");
-const fs = require("fs");
 
-const uploads = path.join(__dirname, "../uploads");
-
-if (!fs.existsSync(uploads)) {
-    fs.mkdirSync(uploads, { recursive: true });
-}
-
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, uploads);
-    },
-
-    filename: (req, file, cb) => {
-        cb(null, `${Date.now()}_${file.originalname}`);
-    }
-});
+const storage = multer.memoryStorage();
 
 const fileFilter = (req, file, cb) => {
     const allowedFileTypes = [
         "image/jpeg",
-        "image/jpg",
-        "image/png"
+        "image/png",
+        "image/webp",
     ];
 
     if (allowedFileTypes.includes(file.mimetype)) {
         cb(null, true);
     } else {
-        cb(new Error("Invalid file type"), false);
+        cb(new Error("Only JPEG, PNG, and WebP images are allowed"));
     }
 };
 
 const upload = multer({
     storage,
-    fileFilter
+    fileFilter,
+    limits: {
+        fileSize: 5 * 1024 * 1024, // 5 MB
+    },
 });
 
-module.exports = upload; 
+module.exports = upload;
